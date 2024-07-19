@@ -246,6 +246,13 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
+    "com.unity.utils": {
+      "version": "https://github.com/RDMJoker/LL_Utils_Unity.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "c8ea0b4346b533224cadad8a1ca0aab09e309ff0"
+    },
     "com.unity.visualscripting": {
       "version": "1.8.0",
       "depth": 0,
