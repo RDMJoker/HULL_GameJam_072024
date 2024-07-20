@@ -47,9 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.01
-  maxHP: 100
+  maxHP: 10
   goldAmount: 4
-  currentHP: 100
+  currentHP: 10
   TilesPassed: 0
 --- !u!212 &4684374836106572795
 SpriteRenderer:

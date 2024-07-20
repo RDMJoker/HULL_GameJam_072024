@@ -36,13 +36,15 @@ namespace DefaultNamespace
                     var vectorPos = objectGrid.GetWorldPosition(x, y);
                     var vectorIntPos = new Vector3Int((int)vectorPos.x, (int)vectorPos.y, (int)vectorPos.z);
                     if (tilemap.GetTile(vectorIntPos) == null) continue;
-                    if (tilemap.GetTile(vectorIntPos).name == "whitePixel")
+                    string tileName = tilemap.GetTile(vectorIntPos).name[..3];
+                    switch (tileName)
                     {
-                        objectGrid.SetValue(vectorIntPos, ETileState.Path);
-                    }
-                    else if (tilemap.GetTile(vectorIntPos).name == "blackPixel")
-                    {
-                        objectGrid.SetValue(vectorIntPos, ETileState.Free);
+                        case "PAT":
+                            objectGrid.SetValue(vectorIntPos, ETileState.Path);
+                            break;
+                        case "GRO":
+                            objectGrid.SetValue(vectorIntPos, ETileState.Free);
+                            break;
                     }
                 }
             }
@@ -53,7 +55,7 @@ namespace DefaultNamespace
             {
                 for (int x = 0; x < objectGrid.Width; x++)
                 {
-                    // Debug.Log("X: " + x + "| Y: " + y + "| Type: " + objectGrid.GetValue(x,y));
+                    Debug.Log("X: " + x + "| Y: " + y + "| Type: " + objectGrid.GetValue(x, y));
                     if (objectGrid.GetValue(x, y) == ETileState.Path) debugPathCount++;
                     if (objectGrid.GetValue(x, y) == ETileState.Free) debugFreeCount++;
                 }

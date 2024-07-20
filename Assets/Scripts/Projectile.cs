@@ -38,10 +38,9 @@ namespace DefaultNamespace
 
         void OnTriggerEnter2D(Collider2D _other)
         {
-            if (_other.gameObject == target.gameObject)
-            {
-                DoDamage();
-            }
+            if( target == null ||target.gameObject == null) return;
+            if (_other == null || target == null ||_other.gameObject != target.gameObject) return;
+            DoDamage();
         }
 
         void DoDamage()

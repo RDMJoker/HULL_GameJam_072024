@@ -26,6 +26,8 @@ namespace DefaultNamespace.Enemies
 
         public int TilesPassed;
 
+        public Action<GameObject> OnDeath;
+
         void Start()
         {
             (nextPosition, direction) = GetNextPosition();
@@ -65,6 +67,8 @@ namespace DefaultNamespace.Enemies
             currentHP = Mathf.Max(currentHP - _damageValue, 0);
             if (currentHP != 0) return;
             ScoreManager.Instance.IncreaseCurrencyScore(goldAmount);
+            if (gameObject == null) return;
+            OnDeath.Invoke(gameObject);
             Destroy(gameObject);
         }
 

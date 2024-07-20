@@ -91,7 +91,7 @@ namespace DefaultNamespace.Buildings
         {
             while (true)
             {
-                while (isShooting)
+                while (isShooting && target != null)
                 {
                     var position = target.transform.position;
                     Vector3 direction = target.transform.position - transform.position;
@@ -105,7 +105,6 @@ namespace DefaultNamespace.Buildings
                     spawnedProjectile.transform.up = direction;
                     yield return new WaitForSeconds(1 / attackSpeed);
                 }
-
                 yield return new WaitForFixedUpdate();
             }
         }

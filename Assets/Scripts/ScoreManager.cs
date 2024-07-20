@@ -9,6 +9,7 @@ namespace DefaultNamespace
         public static ScoreManager Instance;
 
         public int Currency { get; private set; }
+        public int Wave { get; private set; }
 
         void OnEnable()
         {
@@ -20,6 +21,12 @@ namespace DefaultNamespace
             {
                 Destroy(this);
             }
+        }
+
+        public void SetWave(int _value)
+        {
+            Wave = _value;
+            UIManager.Instance.UpdateWaveScore();
         }
 
         public void IncreaseCurrencyScore(int _amount)

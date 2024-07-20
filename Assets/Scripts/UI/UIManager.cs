@@ -10,6 +10,7 @@ namespace DefaultNamespace.UI
         [SerializeField] TextMeshProUGUI currencyValue;
         [SerializeField] GameObject buildUI;
         [SerializeField] BuildingUI buildingUI;
+        [SerializeField] TextMeshProUGUI waveScore;
         public static UIManager Instance;
         void Awake()
         {
@@ -21,6 +22,11 @@ namespace DefaultNamespace.UI
             {
                 Destroy(this);
             }
+        }
+
+        public void UpdateWaveScore()
+        {
+            waveScore.text = ScoreManager.Instance.Wave.ToString();
         }
 
         public void UpdateCurrencyValue()
