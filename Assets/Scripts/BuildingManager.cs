@@ -47,11 +47,17 @@ namespace DefaultNamespace
             Instantiate(selectedBuildingUISlot.buildingPrefab.gameObject, GridManager.Instance.objectGrid.GetGridPositionFromMouse(_mousePosition) + new Vector3(1,1) * 0.5f, Quaternion.identity);
             selectedBuildingUISlot.DisableSelection();
             selectedBuildingUISlot = null;
+            if (selectedBuilding == null) return;
+            selectedBuilding.SetHighlighter(false);
         }
 
         void EndSelection(Vector3 _mousePosition)
         {
-            if(selectedBuilding != null) UIManager.Instance.ShowBuildUI();
+            if (selectedBuilding != null)
+            {
+                UIManager.Instance.ShowBuildUI();
+                selectedBuilding.SetHighlighter(false);
+            }
             if (selectedBuildingUISlot == null) return;
             selectedBuildingUISlot.DisableByCancellation();
             selectedBuildingUISlot = null;

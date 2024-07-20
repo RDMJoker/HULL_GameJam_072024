@@ -6,6 +6,7 @@ using DefaultNamespace.Enemies;
 using DefaultNamespace.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace DefaultNamespace.Buildings
 {
@@ -17,9 +18,11 @@ namespace DefaultNamespace.Buildings
         [SerializeField] LayerMask enemyLayer;
         [SerializeField] Projectile projectile;
 
-        // [SerializeField] GameObject buildingWeapon;
-        // [SerializeField] List<Sprite> bodies;
-        // [SerializeField] List<Sprite> heads;
+        [SerializeField] GameObject buildingWeapon;
+        [SerializeField] List<Sprite> bodies;
+        [SerializeField] List<Sprite> heads;
+
+        [SerializeField] Image highlighter;
 
         SpriteRenderer spriteRenderer;
         SpriteRenderer weaponSpriteRenderer;
@@ -41,10 +44,10 @@ namespace DefaultNamespace.Buildings
         void Awake()
         {
             StartCoroutine(Shoot());
-            // spriteRenderer = GetComponent<SpriteRenderer>();
-            // weaponSpriteRenderer = buildingWeapon.GetComponent<SpriteRenderer>();
-            // spriteRenderer.sprite = bodies[UpgradeLevel - 1];
-            // weaponSpriteRenderer.sprite = heads[UpgradeLevel - 1];
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            weaponSpriteRenderer = buildingWeapon.GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = bodies[UpgradeLevel - 1];
+            weaponSpriteRenderer.sprite = heads[UpgradeLevel - 1];
         }
 
         void FixedUpdate()
@@ -95,16 +98,16 @@ namespace DefaultNamespace.Buildings
                 {
                     var position = target.transform.position;
                     Vector3 direction = target.transform.position - transform.position;
-                    transform.up = direction;
-                    // buildingWeapon.transform.up = direction;
+                    // transform.up = direction;
+                    buildingWeapon.transform.up = direction;
                     var spawnedProjectile = Instantiate(projectile, transform.position, Quaternion.identity);
-                    spawnedProjectile.transform.LookAt(position);
-                    spawnedProjectile.GetComponent<Rigidbody2D>().velocity = transform.up * 2f;
+                    spawnedProjectile.GetComponent<Rigidbody2D>().velocity = buildingWeapon.transform.up * 2f;
                     spawnedProjectile.SetDamage(attackDamage);
                     spawnedProjectile.SetDestination(target);
                     spawnedProjectile.transform.up = direction;
                     yield return new WaitForSeconds(1 / attackSpeed);
                 }
+
                 yield return new WaitForFixedUpdate();
             }
         }
@@ -121,6 +124,7 @@ namespace DefaultNamespace.Buildings
             {
                 BuildingManager.Instance.selectedBuilding = this;
                 UIManager.Instance.ShowBuildingUI();
+                SetHighlighter(true);
             }
         }
 
@@ -132,6 +136,15 @@ namespace DefaultNamespace.Buildings
             attackRange += 0.5f;
             // spriteRenderer.sprite = bodies[UpgradeLevel - 1];
             // weaponSpriteRenderer.sprite = heads[UpgradeLevel - 1];
+        }
+
+        public void SetHighlighter(bool _isOn)
+        {
+            highlighter.color = _isOn switch
+            {
+                true => new Color(highlighter.color.r, highlighter.color.g, highlighter.color.b, 0.15f),
+                false => new Color(highlighter.color.r, highlighter.color.g, highlighter.color.b, 0),
+            };
         }
     }
 }

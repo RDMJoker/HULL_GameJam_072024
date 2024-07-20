@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.01
   maxHP: 10
-  goldAmount: 4
+  goldAmount: 5
   currentHP: 10
   TilesPassed: 0
 --- !u!212 &4684374836106572795
