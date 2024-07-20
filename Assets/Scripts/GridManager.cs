@@ -10,11 +10,20 @@ namespace DefaultNamespace
         [SerializeField] Tilemap tilemap;
         [SerializeField] int gridWidth;
         [SerializeField] int gridHeight;
-        ObjectGrid<ETileState> objectGrid;
+        public ObjectGrid<ETileState> objectGrid;
+
+        public static GridManager Instance;
 
         void OnEnable()
         {
-            ClickManager.OnLeftClick += 
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(this);
+            }
         }
 
         void Awake()
