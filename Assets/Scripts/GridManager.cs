@@ -33,17 +33,17 @@ namespace DefaultNamespace
             {
                 for (int x = 0; x < objectGrid.Width; x++)
                 {
-                   var vectorPos = objectGrid.GetWorldPosition(x, y);
-                   var vectorIntPos = new Vector3Int((int)vectorPos.x, (int)vectorPos.y, (int)vectorPos.z);
-                   if (tilemap.GetTile(vectorIntPos) == null) continue;
-                   if (tilemap.GetTile(vectorIntPos).name == "whitePixel")
-                   {
-                       objectGrid.SetValue(vectorIntPos, ETileState.Path);
-                   }
-                   else if (tilemap.GetTile(vectorIntPos).name == "blackPixel")
-                   {
-                       objectGrid.SetValue(vectorIntPos,ETileState.Free);
-                   }
+                    var vectorPos = objectGrid.GetWorldPosition(x, y);
+                    var vectorIntPos = new Vector3Int((int)vectorPos.x, (int)vectorPos.y, (int)vectorPos.z);
+                    if (tilemap.GetTile(vectorIntPos) == null) continue;
+                    if (tilemap.GetTile(vectorIntPos).name == "whitePixel")
+                    {
+                        objectGrid.SetValue(vectorIntPos, ETileState.Path);
+                    }
+                    else if (tilemap.GetTile(vectorIntPos).name == "blackPixel")
+                    {
+                        objectGrid.SetValue(vectorIntPos, ETileState.Free);
+                    }
                 }
             }
 
@@ -53,13 +53,13 @@ namespace DefaultNamespace
             {
                 for (int x = 0; x < objectGrid.Width; x++)
                 {
-                    Debug.Log("X: " + x + "| Y: " + y + "| Type: " + objectGrid.GetValue(x,y));
+                    // Debug.Log("X: " + x + "| Y: " + y + "| Type: " + objectGrid.GetValue(x,y));
                     if (objectGrid.GetValue(x, y) == ETileState.Path) debugPathCount++;
-                    if (objectGrid.GetValue(x,y) == ETileState.Free) debugFreeCount++;
+                    if (objectGrid.GetValue(x, y) == ETileState.Free) debugFreeCount++;
                 }
             }
-            Debug.Log("Paths: " + debugPathCount);
-            Debug.Log("Free: " + debugFreeCount);
+            // Debug.Log("Paths: " + debugPathCount);
+            // Debug.Log("Free: " + debugFreeCount);
         }
     }
 }
