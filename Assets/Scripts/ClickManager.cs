@@ -11,6 +11,7 @@ namespace DefaultNamespace
 
         public static Action<Vector3> OnLeftClick;
         public static Action<Vector3> OnRightClick;
+
         public void Point(InputAction.CallbackContext _context)
         {
             var value = _context.ReadValue<Vector2>();
@@ -20,17 +21,17 @@ namespace DefaultNamespace
                 currentMousePositionWorld.z = 0f;
             }
 
-            Debug.Log(currentMousePositionWorld);
         }
 
         public void LeftClick(InputAction.CallbackContext _context)
         {
-            OnLeftClick.Invoke(currentMousePositionWorld);
+                OnLeftClick.Invoke(currentMousePositionWorld);
+            
         }
 
         public void RightClick(InputAction.CallbackContext _context)
         {
-            OnRightClick.Invoke(currentMousePositionWorld);
+                OnRightClick.Invoke(currentMousePositionWorld);
         }
     }
 }
