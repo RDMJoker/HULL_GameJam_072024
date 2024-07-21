@@ -32,6 +32,7 @@ namespace DefaultNamespace.Buildings
         public float AttackRange => attackRange;
         public int UpgradeLevel = 1;
         public int MaxUpgradeLevel = 3;
+        public string Name;
 
 
         public ETargetOption targetOption;
@@ -101,7 +102,7 @@ namespace DefaultNamespace.Buildings
                     // transform.up = direction;
                     buildingWeapon.transform.up = direction;
                     var spawnedProjectile = Instantiate(projectile, transform.position, Quaternion.identity);
-                    spawnedProjectile.GetComponent<Rigidbody2D>().velocity = buildingWeapon.transform.up * 2f;
+                    spawnedProjectile.GetComponent<Rigidbody2D>().velocity = buildingWeapon.transform.up * 5f;
                     spawnedProjectile.SetDamage(attackDamage);
                     spawnedProjectile.SetDestination(target);
                     spawnedProjectile.transform.up = direction;

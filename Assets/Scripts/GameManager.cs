@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace.Enemies;
+using DefaultNamespace.Scriptables;
 using DefaultNamespace.UI;
 using LL_Unity_Utils.Timers;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace DefaultNamespace
         [SerializeField] int enemyIncreasePerWave;
         [SerializeField] int maxDurationBetweenWaves;
         [SerializeField] int enemyStartAmount;
+        [SerializeField] SceneLoader mainMenuLoader;
 
         int wave = 1;
         int enemyAmount;
@@ -37,7 +39,18 @@ namespace DefaultNamespace
             ScoreManager.Instance.SetWave(wave);
             UIManager.Instance.UpdateWaveScore();
             spawnWaves = true;
+            StartCoroutine(StartCountdown());
+        }
+
+        IEnumerator StartCountdown()
+        {
+            for (int i = 5; i != 0; i--)
+            {
+                UIManager.Instance.PrintDisplayMessage("Waves start in: " + i + "!",1);
+                yield return new WaitForSeconds(1);
+            }
             StartCoroutine(WaveSpawning());
+            StartCoroutine(CheckEndGame());
         }
 
         IEnumerator WaveSpawning()
@@ -73,6 +86,15 @@ namespace DefaultNamespace
             }
         }
 
+        IEnumerator CheckEndGame()
+        {
+            while (!ScoreManager.Instance.HasLost)
+            {
+                yield return null;
+            }
+            StartCoroutine(EndGame());
+        }
+
         void OnRegisterEnemyDeath(GameObject _enemy)
         {
             aliveEnemies.Remove(_enemy);
@@ -80,9 +102,22 @@ namespace DefaultNamespace
             enemyComponent.OnDeath -= OnRegisterEnemyDeath;
         }
 
-        void EndGame()
+        IEnumerator EndGame()
         {
             spawnWaves = false;
+            foreach (var aliveEnemy in aliveEnemies)
+            {
+                Destroy(aliveEnemy);
+            }
+            aliveEnemies.Clear();
+            UIManager.Instance.PrintDisplayMessage("You survived " + wave + " waves!", 5);
+            yield return new WaitForSeconds(5.5f);
+            mainMenuLoader.Load();
+        }
+
+        public void ReturnToMenu()
+        {
+            mainMenuLoader.Load();
         }
 
         GameObject SpawnEnemy(GameObject _enemy)

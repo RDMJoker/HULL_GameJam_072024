@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
@@ -11,6 +12,8 @@ namespace DefaultNamespace.UI
         [SerializeField] GameObject buildUI;
         [SerializeField] BuildingUI buildingUI;
         [SerializeField] TextMeshProUGUI waveScore;
+        [SerializeField] TextMeshProUGUI lifeValue;
+        [SerializeField] TextMeshProUGUI messageField;
         public static UIManager Instance;
         void Awake()
         {
@@ -46,9 +49,27 @@ namespace DefaultNamespace.UI
             buildingUI.gameObject.SetActive(true);
         }
 
+        public void UpdateLifeUI()
+        {
+            lifeValue.text = ScoreManager.Instance.Life.ToString();
+        }
+
         public void UpdateBuildingUI()
         {
             buildingUI.UpdateBuildingUI();
+        }
+
+        public void PrintDisplayMessage(string _message, float _displayDuration)
+        {
+            messageField.text = _message;
+            StartCoroutine(ShowMessage(_displayDuration));
+        }
+
+        IEnumerator ShowMessage(float _displayDuration)
+        {
+            messageField.gameObject.SetActive(true);
+            yield return new WaitForSeconds(_displayDuration);
+            messageField.gameObject.SetActive(false);
         }
     }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2273861657192049805}
   - component: {fileID: -2967698678754584269}
   m_Layer: 0
-  m_Name: BuildingBody
+  m_Name: MachineGunTower_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,8 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be675dedb6b54878ab89ebca28771bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 1
-  attackDamage: 10
+  attackSpeed: 1.5
+  attackDamage: 3
   attackRange: 2
   enemyLayer:
     serializedVersion: 2
@@ -118,6 +118,7 @@ MonoBehaviour:
   highlighter: {fileID: 998158848970225748}
   UpgradeLevel: 1
   MaxUpgradeLevel: 3
+  Name: Machinegun
   targetOption: 0
 --- !u!1 &7065253341714952358
 GameObject:

@@ -11,6 +11,7 @@ namespace DefaultNamespace.Enemies
         [SerializeField] int goldAmount;
         public float currentHP;
         public float MaxHP => maxHP;
+        public EEnemyType EnemyType;
 
         Vector2 nextPosition;
         Vector2 correctedNextPosition

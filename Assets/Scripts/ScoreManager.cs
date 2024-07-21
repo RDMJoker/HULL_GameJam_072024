@@ -11,6 +11,10 @@ namespace DefaultNamespace
         public int Currency { get; private set; }
         public int Wave { get; private set; }
 
+        public int Life { get; private set; }
+
+        public bool HasLost { get; private set; }
+
         void OnEnable()
         {
             if (Instance == null)
@@ -21,6 +25,9 @@ namespace DefaultNamespace
             {
                 Destroy(this);
             }
+
+            Life = 10;
+            UIManager.Instance.UpdateLifeUI();
         }
 
         public void SetWave(int _value)
@@ -39,6 +46,17 @@ namespace DefaultNamespace
         {
             Currency -= _amount;
             UIManager.Instance.UpdateCurrencyValue();
+        }
+
+        public void IncreaseLife()
+        {
+        }
+
+        public void DecreaseLife(int _amount)
+        {
+            Life = Mathf.Max(Life - _amount, 0);
+            UIManager.Instance.UpdateLifeUI();
+            if (Life == 0) HasLost = true;
         }
     }
 }
