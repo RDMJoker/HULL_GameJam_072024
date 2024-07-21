@@ -129,7 +129,7 @@ namespace DefaultNamespace
 
         GameObject SpawnEnemy(GameObject _enemy)
         {
-            return Instantiate(_enemy.gameObject, new Vector3(0, 0, 0) + new Vector3(1, 1) * 0.5f, Quaternion.identity);
+            return Instantiate(_enemy.gameObject, new Vector3(1, 0, 0) + new Vector3(1, 1) * 0.5f, Quaternion.identity);
         }
     }
 }
