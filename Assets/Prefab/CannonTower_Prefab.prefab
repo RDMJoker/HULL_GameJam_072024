@@ -99,13 +99,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be675dedb6b54878ab89ebca28771bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 1.5
-  attackDamage: 3
+  attackSpeed: 0.5
+  attackDamage: 5
   attackRange: 2
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
-  projectile: {fileID: -6547976290577396866, guid: c68424f7c3e76dc4cb1c8d4121070d4a, type: 3}
+  projectile: {fileID: 7631446549652780145, guid: 6d69c090bf07b1646ae46f1b9ee05e76, type: 3}
   buildingWeapon: {fileID: 8520767247858053995}
   bodies:
   - {fileID: 21300000, guid: f438f4142577dd24097541ab5c2a8aa3, type: 3}

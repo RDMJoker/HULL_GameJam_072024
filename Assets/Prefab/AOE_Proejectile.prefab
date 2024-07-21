@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6882518947027326058}
   - component: {fileID: 3364950213961282954}
   - component: {fileID: 4826865747695103951}
-  - component: {fileID: -6547976290577396866}
+  - component: {fileID: 7631446549652780145}
   m_Layer: 0
   m_Name: AOE_Proejectile
   m_TagString: Untagged
@@ -159,7 +159,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &-6547976290577396866
+--- !u!114 &7631446549652780145
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,6 +168,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1704227544668198355}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6964317835343ab8cbaac0af1a1ffae, type: 3}
+  m_Script: {fileID: 11500000, guid: ac05de9ed61f4f2b99816aa5a8325430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy:
+    serializedVersion: 2
+    m_Bits: 64
+  explosionEffect: {fileID: 19800008, guid: 7075bd5fe1480184695a32611c15da57, type: 3}

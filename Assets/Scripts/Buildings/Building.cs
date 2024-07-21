@@ -98,13 +98,20 @@ namespace DefaultNamespace.Buildings
                 while (isShooting && target != null)
                 {
                     var position = target.transform.position;
-                    Vector3 direction = target.transform.position - transform.position;
+                    var direction = target.transform.position - transform.position;
                     // transform.up = direction;
                     buildingWeapon.transform.up = direction;
                     var spawnedProjectile = Instantiate(projectile, transform.position, Quaternion.identity);
                     spawnedProjectile.GetComponent<Rigidbody2D>().velocity = buildingWeapon.transform.up * 5f;
                     spawnedProjectile.SetDamage(attackDamage);
-                    spawnedProjectile.SetDestination(target);
+                    if (spawnedProjectile is AOEProjectile aoeProjectile)
+                    {
+                        aoeProjectile.SetDestination(target.transform.position);
+                    }
+                    else
+                    {
+                        spawnedProjectile.SetDestination(target);
+                    }
                     spawnedProjectile.transform.up = direction;
                     yield return new WaitForSeconds(1 / attackSpeed);
                 }
