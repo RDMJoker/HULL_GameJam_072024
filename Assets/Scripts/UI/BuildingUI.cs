@@ -36,6 +36,7 @@ namespace DefaultNamespace.UI
         public void UpdateBuildingUI()
         {
             SetSelectedBuilding();
+            targetButton.text = building.targetOption.ToString().Replace("ETargetOption.", "");
             attackSpeed.text = building.AttackSpeed.ToString();
             attackDamage.text = building.AttackDamage.ToString();
             attackRange.text = building.AttackRange.ToString();

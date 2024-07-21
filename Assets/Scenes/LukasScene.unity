@@ -4332,6 +4332,7 @@ MonoBehaviour:
   enemies:
   - {fileID: 207784444186808797, guid: 6c050a42f37a55c42888efd0cc7e6069, type: 3}
   - {fileID: 8330638166948563495, guid: 5a3faa835e8c532488cabb2cb2661b6d, type: 3}
+  - {fileID: 7145336064825247215, guid: f6bc851b4d164a9479bc242fdcfcfafd, type: 3}
   bossEnemy: {fileID: 4341832141596399820, guid: cc36bf0a3c0f1024a9c2697f783c40be, type: 3}
   enemyIncreasePerWave: 2
   maxDurationBetweenWaves: 30

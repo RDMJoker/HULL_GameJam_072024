@@ -57,7 +57,12 @@ namespace DefaultNamespace
 
         Enemy GetRandomEnemy()
         {
-            return wave < 5 ? enemies[0] : enemies[Random.Range(0, enemies.Count)];
+            return wave switch
+            {
+                < 5 => enemies[0],
+                < 10 => enemies[Random.Range(0, 2)],
+                _ => enemies[Random.Range(0, enemies.Count)]
+            };
         }
 
         IEnumerator WaveSpawning()
