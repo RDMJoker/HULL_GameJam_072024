@@ -21,10 +21,16 @@ namespace DefaultNamespace.Buildings
         
         public void OnPointerClick(PointerEventData _eventData)
         {
-            if (ScoreManager.Instance.Currency < currencyCost)
+            if (ScoreManager.Instance.Currency < currencyCost && border.gameObject.activeInHierarchy == false)
             {
                 UIManager.Instance.PrintDisplayMessage("Not enough currency!", 2);
                 return;
+            }
+            if (border.gameObject.activeInHierarchy) return;
+            if (BuildingManager.Instance.selectedBuildingUISlot != null && BuildingManager.Instance.selectedBuildingUISlot != this)
+            {
+                ScoreManager.Instance.IncreaseCurrencyScore(BuildingManager.Instance.selectedBuildingUISlot.currencyCost);
+                BuildingManager.Instance.selectedBuildingUISlot.DisableSelection();
             }
             ScoreManager.Instance.DecreaseCurrencyScore(currencyCost);
             border.gameObject.SetActive(true);

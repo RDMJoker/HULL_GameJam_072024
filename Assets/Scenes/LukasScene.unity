@@ -2614,6 +2614,7 @@ GameObject:
   m_Component:
   - component: {fileID: 674879775}
   - component: {fileID: 674879776}
+  - component: {fileID: 674879777}
   m_Layer: 0
   m_Name: BuildingManager
   m_TagString: Untagged
@@ -2649,6 +2650,103 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedBuilding: {fileID: 0}
+  buildingSound: {fileID: 8300000, guid: 4b82bc7e3c03f9c41b6f1aed9b70092b, type: 3}
+--- !u!82 &674879777
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674879774}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 0.7
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &716057162
 GameObject:
   m_ObjectHideFlags: 0
@@ -2772,7 +2870,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &716057165
@@ -3393,7 +3491,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &954698456
@@ -3735,7 +3833,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1123959559
@@ -4095,7 +4193,6 @@ MonoBehaviour:
   border: {fileID: 361461053}
   towerTextLabel: {fileID: 853917625}
   towerCostLabel: {fileID: 629051337}
-  currencyCost: 10
 --- !u!1 &1249259293
 GameObject:
   m_ObjectHideFlags: 0
@@ -4295,7 +4392,6 @@ MonoBehaviour:
   border: {fileID: 1057474926}
   towerTextLabel: {fileID: 853917625}
   towerCostLabel: {fileID: 629051337}
-  currencyCost: 50
 --- !u!1 &1366197158
 GameObject:
   m_ObjectHideFlags: 0
@@ -4541,7 +4637,7 @@ Transform:
   m_GameObject: {fileID: 1370953888}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.48, y: 7.498, z: 0.11943335}
+  m_LocalPosition: {x: 12.13, y: 7.498, z: 0.11943335}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4667,6 +4763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeButton: {fileID: 877316118}
+  upgradeButtonText: {fileID: 1744587202}
   targetButton: {fileID: 1895961589}
   attackSpeed: {fileID: 954698455}
   attackDamage: {fileID: 1123959558}
@@ -5348,7 +5445,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Upgrade
+  m_text: Upgrade (000)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 98c3267317faf17439cecd807da5d859, type: 2}
   m_sharedMaterial: {fileID: 3049724005148646536, guid: 98c3267317faf17439cecd807da5d859, type: 2}
@@ -5414,7 +5511,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1744587203
@@ -5675,7 +5772,6 @@ MonoBehaviour:
   border: {fileID: 1198063431}
   towerTextLabel: {fileID: 853917625}
   towerCostLabel: {fileID: 629051337}
-  currencyCost: 3
 --- !u!1 &1826729715
 GameObject:
   m_ObjectHideFlags: 0
@@ -5977,7 +6073,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1895961590
@@ -6359,7 +6455,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1000, y: 50}
+  m_SizeDelta: {x: 1400, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2147254445
 MonoBehaviour:

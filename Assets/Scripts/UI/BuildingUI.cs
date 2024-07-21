@@ -9,6 +9,7 @@ namespace DefaultNamespace.UI
     public class BuildingUI : MonoBehaviour
     {
         [SerializeField] Button upgradeButton;
+        [SerializeField] TextMeshProUGUI upgradeButtonText;
         [SerializeField] TextMeshProUGUI targetButton;
         [SerializeField] TextMeshProUGUI attackSpeed;
         [SerializeField] TextMeshProUGUI attackDamage;
@@ -16,8 +17,10 @@ namespace DefaultNamespace.UI
         [SerializeField] TextMeshProUGUI upgradeLevel;
 
         bool isMaxLevel;
-        
+
         Building building;
+
+        int upgradeCost => building.CurrencyCost * building.UpgradeLevel;
 
         void OnEnable()
         {
@@ -37,17 +40,24 @@ namespace DefaultNamespace.UI
             attackDamage.text = building.AttackDamage.ToString();
             attackRange.text = building.AttackRange.ToString();
             upgradeLevel.text = building.UpgradeLevel.ToString();
+            upgradeButton.enabled = true;
             if (building.UpgradeLevel >= building.MaxUpgradeLevel) upgradeButton.enabled = false;
+            if (building.UpgradeLevel == building.MaxUpgradeLevel) upgradeButtonText.text = "Max Level";
+            else upgradeButtonText.text = "Upgrade(" + upgradeCost + ")";
         }
 
         public void DoBuildingUpgrade()
         {
-            if (ScoreManager.Instance.Currency < (building.CurrencyCost * 0.5) * building.UpgradeLevel)
+            if (ScoreManager.Instance.Currency < upgradeCost)
             {
                 UIManager.Instance.PrintDisplayMessage("Not enough currency!", 2);
             }
-            building.Upgrade();
-            UpdateBuildingUI();
+            else
+            {
+                ScoreManager.Instance.DecreaseCurrencyScore(upgradeCost);
+                building.Upgrade();
+                UpdateBuildingUI();
+            }
         }
 
         public void SwapTargetOption()

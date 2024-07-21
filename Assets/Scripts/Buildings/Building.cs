@@ -176,7 +176,13 @@ namespace DefaultNamespace.Buildings
         {
             if (_eventData.button == PointerEventData.InputButton.Left)
             {
+                if (BuildingManager.Instance.selectedBuilding != null)
+                {
+                    BuildingManager.Instance.selectedBuilding.SetHighlighter(false);
+                    BuildingManager.Instance.selectedBuilding = null;
+                }
                 BuildingManager.Instance.selectedBuilding = this;
+                UIManager.Instance.UpdateBuildingUI();
                 UIManager.Instance.ShowBuildingUI();
                 SetHighlighter(true);
             }
@@ -185,14 +191,9 @@ namespace DefaultNamespace.Buildings
         public void Upgrade()
         {
             UpgradeLevel++;
-            attackDamage += attackDamage * 0.10f;
-            attackSpeed += attackSpeed * 0.10f;
-            attackRange += attackRange * 0.10f;
-            // attackDamage += 5;
-            // attackSpeed += 0.5f;
-            // attackRange += 0.5f;
-            // spriteRenderer.sprite = bodies[UpgradeLevel - 1];
-            // weaponSpriteRenderer.sprite = heads[UpgradeLevel - 1];
+            attackDamage += attackDamage * 0.25f;
+            attackSpeed += attackSpeed * 0.25f;
+            attackRange += attackRange * 0.25f;
         }
 
         public void SetHighlighter(bool _isOn)
