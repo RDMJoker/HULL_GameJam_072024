@@ -47,9 +47,10 @@ namespace DefaultNamespace
         {
             for (int i = 5; i != 0; i--)
             {
-                UIManager.Instance.PrintDisplayMessage("Waves start in: " + i + "!",1);
+                UIManager.Instance.PrintDisplayMessage("Waves start in: " + i + "!", 1);
                 yield return new WaitForSeconds(1);
             }
+
             StartCoroutine(WaveSpawning());
             StartCoroutine(CheckEndGame());
         }
@@ -71,6 +72,15 @@ namespace DefaultNamespace
                     aliveEnemies.Add(spawnedEnemyObject);
                     var spawnedEnemy = spawnedEnemyObject.GetComponent<Enemy>();
                     RegisterEnemy(spawnedEnemy);
+                    for (int i = 0; i < enemyAmount * 0.5f; i++)
+                    {
+                        spawnedEnemyObject = SpawnEnemy(GetRandomEnemy().gameObject);
+                        aliveEnemies.Add(spawnedEnemyObject);
+                        spawnedEnemy = spawnedEnemyObject.GetComponent<Enemy>();
+                        RegisterEnemy(spawnedEnemy);
+                        yield return new WaitForSeconds(0.35f);
+                    }
+
                     yield return new WaitUntil((() => aliveEnemies.Count == 0));
                 }
                 else
@@ -81,12 +91,13 @@ namespace DefaultNamespace
                         aliveEnemies.Add(spawnedEnemyObject);
                         var spawnedEnemy = spawnedEnemyObject.GetComponent<Enemy>();
                         RegisterEnemy(spawnedEnemy);
-                        yield return new WaitForSeconds(0.75f);
+                        yield return new WaitForSeconds(0.35f);
                     }
 
                     enemyAmount = enemyStartAmount + (enemyIncreasePerWave * wave);
                     yield return new WaitUntil(() => aliveEnemies.Count == 0 || waveTimer.CheckTimer());
                 }
+
                 wave++;
                 ScoreManager.Instance.SetWave(wave);
                 yield return new WaitForSeconds(0.5f);
@@ -99,6 +110,7 @@ namespace DefaultNamespace
             {
                 yield return null;
             }
+
             StartCoroutine(EndGame());
         }
 
@@ -116,6 +128,7 @@ namespace DefaultNamespace
             {
                 Destroy(aliveEnemy);
             }
+
             aliveEnemies.Clear();
             UIManager.Instance.PrintDisplayMessage("You survived " + wave + " waves!", 5);
             yield return new WaitForSeconds(5.5f);

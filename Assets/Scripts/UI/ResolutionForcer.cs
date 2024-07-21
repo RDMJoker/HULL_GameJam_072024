@@ -10,5 +10,13 @@ namespace DefaultNamespace.UI
         {
             Screen.SetResolution(1920,1080,FullScreenMode.FullScreenWindow);
         }
+
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
+        }
     }
 }

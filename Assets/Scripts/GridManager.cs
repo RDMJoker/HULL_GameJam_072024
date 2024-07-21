@@ -45,6 +45,9 @@ namespace DefaultNamespace
                         case "GRO":
                             objectGrid.SetValue(vectorIntPos, ETileState.Free);
                             break;
+                        case "GOO":
+                            objectGrid.SetValue(vectorIntPos, ETileState.Occupied);
+                            break;
                     }
                 }
             }

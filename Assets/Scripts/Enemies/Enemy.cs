@@ -14,6 +14,7 @@ namespace DefaultNamespace.Enemies
         public EEnemyType EnemyType;
 
         Vector2 nextPosition;
+
         Vector2 correctedNextPosition
         {
             get
@@ -23,6 +24,7 @@ namespace DefaultNamespace.Enemies
                 return new Vector3(correctedX, correctedY);
             }
         }
+
         Vector3 direction;
 
         public int TilesPassed;
@@ -43,6 +45,7 @@ namespace DefaultNamespace.Enemies
                 (nextPosition, direction) = GetNextPosition();
                 TilesPassed++;
             }
+
             Move();
             transform.up = direction;
         }
@@ -60,6 +63,7 @@ namespace DefaultNamespace.Enemies
             {
                 correctedX = Mathf.FloorToInt(transform.position.x) + 0.5f;
             }
+
             transform.position = new Vector3(correctedX, correctedY, transform.position.z);
         }
 
@@ -69,7 +73,7 @@ namespace DefaultNamespace.Enemies
             if (currentHP != 0) return;
             ScoreManager.Instance.IncreaseCurrencyScore(goldAmount);
             if (gameObject == null) return;
-            if (gameObject != null)OnDeath?.Invoke(gameObject);
+            if (gameObject != null) OnDeath?.Invoke(gameObject);
             Destroy(gameObject);
         }
 
@@ -82,14 +86,9 @@ namespace DefaultNamespace.Enemies
             {
                 if (GridManager.Instance.objectGrid.GetValue(currentPos + localDirection) == ETileState.Path)
                 {
-                    if (localDirection == Vector3.right || localDirection == Vector3.left)
-                    {
-                        return (currentPos + localDirection, localDirection);
-                    }
-
+                    if(localDirection == -direction) continue;
                     return ((currentPos + localDirection), localDirection);
                 }
-
                 Debug.Log("Nothing found!");
             }
 

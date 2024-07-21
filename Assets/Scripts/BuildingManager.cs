@@ -41,7 +41,7 @@ namespace DefaultNamespace
         {
             source = GetComponent<AudioSource>();
             source.clip = buildingSound;
-            Instantiate(previewPrefab);
+            previewPrefab = Instantiate(previewPrefab);
             previewPrefab.SetActive(false);
             StartCoroutine(DrawPreview());
         }
