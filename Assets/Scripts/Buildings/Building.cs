@@ -5,6 +5,7 @@ using System.Linq;
 using DefaultNamespace.Enemies;
 using DefaultNamespace.UI;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -17,12 +18,19 @@ namespace DefaultNamespace.Buildings
         [SerializeField] float attackRange;
         [SerializeField] LayerMask enemyLayer;
         [SerializeField] Projectile projectile;
+        [SerializeField] float projectileSpeed;
 
         [SerializeField] GameObject buildingWeapon;
         [SerializeField] List<Sprite> bodies;
         [SerializeField] List<Sprite> heads;
 
+        [SerializeField] bool useBurstFire;
+        [SerializeField] int amountOfBursts;
+
         [SerializeField] Image highlighter;
+
+        [SerializeField] AudioClip shootSound;
+        AudioSource source;
 
         SpriteRenderer spriteRenderer;
         SpriteRenderer weaponSpriteRenderer;
@@ -34,6 +42,7 @@ namespace DefaultNamespace.Buildings
         public int MaxUpgradeLevel = 3;
         public string Name;
 
+        public int CurrencyCost;
 
         public ETargetOption targetOption;
 
@@ -49,6 +58,8 @@ namespace DefaultNamespace.Buildings
             weaponSpriteRenderer = buildingWeapon.GetComponent<SpriteRenderer>();
             spriteRenderer.sprite = bodies[UpgradeLevel - 1];
             weaponSpriteRenderer.sprite = heads[UpgradeLevel - 1];
+            source = GetComponent<AudioSource>();
+            source.clip = shootSound;
         }
 
         void FixedUpdate()
@@ -97,23 +108,58 @@ namespace DefaultNamespace.Buildings
             {
                 while (isShooting && target != null)
                 {
-                    var position = target.transform.position;
-                    var direction = target.transform.position - transform.position;
-                    // transform.up = direction;
-                    buildingWeapon.transform.up = direction;
-                    var spawnedProjectile = Instantiate(projectile, transform.position, Quaternion.identity);
-                    spawnedProjectile.GetComponent<Rigidbody2D>().velocity = buildingWeapon.transform.up * 5f;
-                    spawnedProjectile.SetDamage(attackDamage);
-                    if (spawnedProjectile is AOEProjectile aoeProjectile)
+                    if (useBurstFire)
                     {
-                        aoeProjectile.SetDestination(target.transform.position);
+                        source.clip = shootSound;
+                        source.Play();
+                        for (int i = 0; i < amountOfBursts; i++)
+                        {
+                            if (target == null) break;
+                            var position = target.transform.position;
+                            var direction = target.transform.position - transform.position;
+                            // transform.up = direction;
+                            buildingWeapon.transform.up = direction;
+                            var spawnedProjectile = Instantiate(projectile, transform.position, Quaternion.identity);
+                            spawnedProjectile.GetComponent<Rigidbody2D>().velocity = buildingWeapon.transform.up * projectileSpeed;
+                            spawnedProjectile.SetDamage(attackDamage);
+                            if (spawnedProjectile is AOEProjectile aoeProjectile)
+                            {
+                                aoeProjectile.SetDestination(target.transform.position, source);
+                            }
+                            else
+                            {
+                                spawnedProjectile.SetDestination(target);
+                            }
+
+                            spawnedProjectile.transform.up = direction;
+                            yield return new WaitForSeconds(0.075f);
+                        }
+
+                        yield return new WaitForSeconds(1 / attackSpeed);
                     }
                     else
                     {
-                        spawnedProjectile.SetDestination(target);
+                        source.clip = shootSound;
+                        source.Play();
+                        var position = target.transform.position;
+                        var direction = target.transform.position - transform.position;
+                        // transform.up = direction;
+                        buildingWeapon.transform.up = direction;
+                        var spawnedProjectile = Instantiate(projectile, transform.position, Quaternion.identity);
+                        spawnedProjectile.GetComponent<Rigidbody2D>().velocity = buildingWeapon.transform.up * projectileSpeed;
+                        spawnedProjectile.SetDamage(attackDamage);
+                        if (spawnedProjectile is AOEProjectile aoeProjectile)
+                        {
+                            aoeProjectile.SetDestination(target.transform.position, source);
+                        }
+                        else
+                        {
+                            spawnedProjectile.SetDestination(target);
+                        }
+
+                        spawnedProjectile.transform.up = direction;
+                        yield return new WaitForSeconds(1 / attackSpeed);
                     }
-                    spawnedProjectile.transform.up = direction;
-                    yield return new WaitForSeconds(1 / attackSpeed);
                 }
 
                 yield return new WaitForFixedUpdate();
@@ -139,9 +185,12 @@ namespace DefaultNamespace.Buildings
         public void Upgrade()
         {
             UpgradeLevel++;
-            attackDamage += 5;
-            attackSpeed += 0.5f;
-            attackRange += 0.5f;
+            attackDamage += attackDamage * 0.10f;
+            attackSpeed += attackSpeed * 0.10f;
+            attackRange += attackRange * 0.10f;
+            // attackDamage += 5;
+            // attackSpeed += 0.5f;
+            // attackRange += 0.5f;
             // spriteRenderer.sprite = bodies[UpgradeLevel - 1];
             // weaponSpriteRenderer.sprite = heads[UpgradeLevel - 1];
         }
@@ -150,7 +199,7 @@ namespace DefaultNamespace.Buildings
         {
             highlighter.color = _isOn switch
             {
-                true => new Color(highlighter.color.r, highlighter.color.g, highlighter.color.b, 0.15f),
+                true => new Color(highlighter.color.r, highlighter.color.g, highlighter.color.b, 0.30f),
                 false => new Color(highlighter.color.r, highlighter.color.g, highlighter.color.b, 0),
             };
         }

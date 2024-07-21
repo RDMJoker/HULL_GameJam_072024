@@ -46,6 +46,7 @@ namespace DefaultNamespace
 
         protected virtual void DoDamage()
         {
+            if (target == null) return;
             target.TakeDamage(damage);
             Destroy(gameObject);
         }

@@ -42,6 +42,10 @@ namespace DefaultNamespace.UI
 
         public void DoBuildingUpgrade()
         {
+            if (ScoreManager.Instance.Currency < (building.CurrencyCost * 0.5) * building.UpgradeLevel)
+            {
+                UIManager.Instance.PrintDisplayMessage("Not enough currency!", 2);
+            }
             building.Upgrade();
             UpdateBuildingUI();
         }

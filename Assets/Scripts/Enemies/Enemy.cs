@@ -43,8 +43,8 @@ namespace DefaultNamespace.Enemies
                 (nextPosition, direction) = GetNextPosition();
                 TilesPassed++;
             }
-
             Move();
+            transform.up = direction;
         }
 
         void Move()
@@ -69,7 +69,7 @@ namespace DefaultNamespace.Enemies
             if (currentHP != 0) return;
             ScoreManager.Instance.IncreaseCurrencyScore(goldAmount);
             if (gameObject == null) return;
-            OnDeath.Invoke(gameObject);
+            if (gameObject != null)OnDeath?.Invoke(gameObject);
             Destroy(gameObject);
         }
 

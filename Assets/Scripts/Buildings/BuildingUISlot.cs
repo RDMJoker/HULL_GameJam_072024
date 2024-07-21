@@ -1,4 +1,5 @@
 ﻿using System;
+using DefaultNamespace.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,7 +15,7 @@ namespace DefaultNamespace.Buildings
         [SerializeField] TextMeshProUGUI towerTextLabel;
         [SerializeField] TextMeshProUGUI towerCostLabel;
 
-        public int currencyCost;
+        int currencyCost => buildingPrefab.CurrencyCost;
         
         public static Action<BuildingUISlot> OnSelect;
         
@@ -22,7 +23,7 @@ namespace DefaultNamespace.Buildings
         {
             if (ScoreManager.Instance.Currency < currencyCost)
             {
-                Debug.Log("Not enough Currency!");
+                UIManager.Instance.PrintDisplayMessage("Not enough currency!", 2);
                 return;
             }
             ScoreManager.Instance.DecreaseCurrencyScore(currencyCost);

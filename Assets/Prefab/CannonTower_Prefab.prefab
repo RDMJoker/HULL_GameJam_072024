@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4883519693564810647}
   - component: {fileID: 2273861657192049805}
   - component: {fileID: -2967698678754584269}
+  - component: {fileID: -6291388483313037995}
   m_Layer: 0
   m_Name: CannonTower_Prefab
   m_TagString: Untagged
@@ -99,13 +100,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be675dedb6b54878ab89ebca28771bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 0.5
-  attackDamage: 5
-  attackRange: 2
+  attackSpeed: 0.15
+  attackDamage: 8
+  attackRange: 3
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
   projectile: {fileID: 7631446549652780145, guid: 6d69c090bf07b1646ae46f1b9ee05e76, type: 3}
+  projectileSpeed: 5
   buildingWeapon: {fileID: 8520767247858053995}
   bodies:
   - {fileID: 21300000, guid: f438f4142577dd24097541ab5c2a8aa3, type: 3}
@@ -115,11 +117,111 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 522a1dec1ab656f43ab60510ba3ef1c8, type: 3}
   - {fileID: 21300000, guid: 522a1dec1ab656f43ab60510ba3ef1c8, type: 3}
   - {fileID: 21300000, guid: 522a1dec1ab656f43ab60510ba3ef1c8, type: 3}
+  useBurstFire: 0
+  amountOfBursts: 0
   highlighter: {fileID: 998158848970225748}
+  shootSound: {fileID: 8300000, guid: 04a6e0abb788e4a4c8c4fb1c61ebd0f2, type: 3}
   UpgradeLevel: 1
   MaxUpgradeLevel: 3
   Name: Cannon
+  CurrencyCost: 50
   targetOption: 0
+--- !u!82 &-6291388483313037995
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4063793676387610347}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7065253341714952358
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,12 +6,13 @@ using DefaultNamespace.Scriptables;
 using DefaultNamespace.UI;
 using LL_Unity_Utils.Timers;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace DefaultNamespace
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] Enemy enemy;
+        [SerializeField] List<Enemy> enemies;
         [SerializeField] Enemy bossEnemy;
         [SerializeField] int enemyIncreasePerWave;
         [SerializeField] int maxDurationBetweenWaves;
@@ -53,6 +54,11 @@ namespace DefaultNamespace
             StartCoroutine(CheckEndGame());
         }
 
+        Enemy GetRandomEnemy()
+        {
+            return wave < 5 ? enemies[0] : enemies[Random.Range(0, enemies.Count)];
+        }
+
         IEnumerator WaveSpawning()
         {
             while (spawnWaves)
@@ -61,7 +67,7 @@ namespace DefaultNamespace
                 waveTimer.StartTimer();
                 if (ScoreManager.Instance.Wave % 15 == 0)
                 {
-                    var spawnedEnemyObject = SpawnEnemy(enemy.gameObject);
+                    var spawnedEnemyObject = SpawnEnemy(bossEnemy.gameObject);
                     aliveEnemies.Add(spawnedEnemyObject);
                     var spawnedEnemy = spawnedEnemyObject.GetComponent<Enemy>();
                     RegisterEnemy(spawnedEnemy);
@@ -71,7 +77,7 @@ namespace DefaultNamespace
                 {
                     for (int i = 0; i < enemyAmount; i++)
                     {
-                        var spawnedEnemyObject = SpawnEnemy(enemy.gameObject);
+                        var spawnedEnemyObject = SpawnEnemy(GetRandomEnemy().gameObject);
                         aliveEnemies.Add(spawnedEnemyObject);
                         var spawnedEnemy = spawnedEnemyObject.GetComponent<Enemy>();
                         RegisterEnemy(spawnedEnemy);
@@ -83,6 +89,7 @@ namespace DefaultNamespace
                 }
                 wave++;
                 ScoreManager.Instance.SetWave(wave);
+                yield return new WaitForSeconds(0.5f);
             }
         }
 
